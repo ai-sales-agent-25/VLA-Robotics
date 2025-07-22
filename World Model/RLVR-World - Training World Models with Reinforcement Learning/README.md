@@ -1,4 +1,4 @@
-arxiv.org/abs/2505.13934v1
+https://arxiv.org/abs/2505.13934v1
 
 **RLVR-World: Training World Models with Reinforcement Learning**
 
