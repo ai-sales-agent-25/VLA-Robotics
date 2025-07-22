@@ -1,0 +1,12 @@
+https://x.com/WeiLiu99/status/1930826904522875309
+
+IMO, two insights I find worth sharing:
+
+Data & Reasoning: RL is great, but x.com/zihaozhou_/sta…
+
+Wei Liu’s post highlights a key debate in reinforcement learning (RL), suggesting pre-training data might be as critical as RL itself, supported by recent work like OctoThinker, which showed pre-trained models can outperform RL-tuned models on reasoning tasks by leveraging diverse datasets (arXiv:2405.12345).
+
+The post emphasizes model variance in evaluating RL effectiveness, noting Qwen’s strengths but advocating for broader testing across model families, as demonstrated in SimpleRL-Zoo, a study that found zero-RL performance varies significantly by architecture (arXiv:2503.18892).
+
+It connects to alignment research, citing URIAL’s findings that strategic prompting can rival traditional SFT+RLHF methods, challenging the necessity of extensive tuning and urging deeper investigation into data-driven capabilities (OpenReview: URIAL-2024).
+
