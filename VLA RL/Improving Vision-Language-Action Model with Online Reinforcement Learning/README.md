@@ -1,5 +1,7 @@
 https://arxiv.org/abs/2501.16664
 
+https://itcanthink.substack.com/p/paper-notes-improving-vision-language
+
 **Paper:** Improving Vision-Language-Action Model with Online Reinforcement Learning
 
 ### 1. Summary and Rating
