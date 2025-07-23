@@ -1,1 +1,33 @@
 https://arxiv.org/abs/2506.08440v2
+
+**TGRPO: Fine-tuning Vision-Language-Action Model via Trajectory-wise Group Relative Policy Optimization**
+
+### 1. Summary and Rating
+
+This paper proposes a novel reinforcement learning (RL) algorithm, Trajectory-wise Group Relative Policy Optimization (TGRPO), designed to fine-tune pre-trained Vision-Language-Action (VLA) models for new robotic manipulation tasks. The authors identify a key limitation in the standard fine-tuning approach, Supervised Fine-Tuning (SFT), which relies on static datasets and does not allow for learning from live interaction. To address this, they adapt the Group Relative Policy Optimization (GRPO) algorithm—originally for Large Language Models—to the robotics domain. The core innovation is the fusion of two distinct advantage signals: a step-level advantage that compares instantaneous rewards across parallel trajectories, and a trajectory-level advantage that compares the overall outcome of entire episodes. This combined signal provides a richer, more holistic learning objective suitable for temporally extended robotic tasks. The method is validated on ten manipulation tasks in the LIBERO-Object benchmark, where it significantly outperforms SFT and the standard PPO algorithm, demonstrating more robust and efficient online fine-tuning.
+
+**Rating: 8.5/10**
+
+This is a strong paper that makes a well-defined and valuable contribution to the highly relevant field of fine-tuning foundation models for robotics. The central idea of adapting GRPO by fusing step-wise and trajectory-wise advantages is a clever and effective solution to a clear problem. The methodology is sound, avoiding the need for a separate value function, and the experimental validation is rigorous, with clear baselines, ablation studies, and analysis performed on a standard benchmark. The authors are also transparent about the limitations, such as the need for hyperparameter tuning. While not a complete paradigm shift, the work represents a significant step forward from offline SFT towards more capable and adaptive online RL-based fine-tuning for VLAs.
+
+### 2. Main Ideas
+
+The three main ideas discussed in this paper are:
+
+1.  **Adapting Group-Based RL for Robotics:** The paper's primary contribution is the adaptation of Group Relative Policy Optimization (GRPO), an algorithm from the language model domain, to the fine-tuning of robotic agents. This is achieved by running multiple identical simulation environments in parallel to generate a "group" of trajectories for a given task, which are then compared against each other to create a learning signal without needing a complex value function.
+2.  **Fusing Step-level and Trajectory-level Advantages:** The key technical innovation is the creation of a hybrid advantage function that combines two sources of information. It uses a *step-level* relative advantage (`S_i,t`) to capture immediate, granular feedback at each moment in time, and a *trajectory-level* relative advantage (`T_i`) to provide a global signal about the overall success or failure of an entire attempt. This fusion allows the model to learn from both short-term actions and long-term outcomes, which is crucial for complex, multi-stage robotic tasks.
+3.  **Online Interactive Fine-Tuning over Static SFT:** The paper advocates for a shift away from fine-tuning VLAs with static, pre-collected datasets (SFT) towards online reinforcement learning. By allowing the robot to learn directly from live interaction with the environment, TGRPO enables continuous adaptation, higher sample efficiency, and the ability to generalize better to variations not present in an offline dataset.
+
+### 3. 10 Most Important Citations
+
+1.  **Shao et al. (2024). Deepseekmath: Pushing the limits of mathematical reasoning in open language models.** This paper introduced Group Relative Policy Optimization (GRPO), the core algorithm that the authors adapt and build upon to create TGRPO.
+2.  **Schulman et al. (2017). Proximal policy optimization algorithms.** This work introduced Proximal Policy Optimization (PPO), a foundational RL algorithm that serves as a direct predecessor to GRPO and is used as a key experimental baseline in the paper.
+3.  **Kim et al. (2024). Openvla: An open-source vision-language-action model.** This is the specific Vision-Language-Action (VLA) model that the authors use as the foundation for their fine-tuning experiments, making it central to the practical implementation of their work.
+4.  **Liu et al. (2023). Libero: Benchmarking knowledge transfer for lifelong robot learning.** This paper introduced the LIBERO simulation environment, which was used as the exclusive testbed for all experiments and enabled the evaluation of the proposed method.
+5.  **Zhang et al. (2024). Grape: Generalizing robot policy via preference alignment.** This is cited as a closely related contemporary work that also uses RL to fine-tune VLAs, providing crucial context and a point of comparison for the authors' online approach versus GRAPE's offline-style training.
+6.  **Guo et al. (2025). Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning.** This work is cited as the inspiration for the paper, as it highlighted the power of the GRPO algorithm for LLMs, motivating the authors to investigate its applicability to VLAs.
+7.  **Brohan et al. (2023). Rt-2: Vision-language-action models transfer web knowledge to robotic control.** This is a landmark paper that established the capabilities of VLA models, and citing it grounds the current work within the broader context and importance of the field.
+8.  **Driess et al. (2023). Palm-e: An embodied multimodal language model.** This paper introduced a foundational embodied multimodal model, and its citation helps establish the background and significance of the VLA research area that TGRPO contributes to.
+    *   Link: https://api.semanticscholar.org/CorpusID:257364842
+9.  **Rafailov et al. (2023). Direct preference optimization: Your language model is secretly a reward model.** This paper introduced Direct Policy Optimization (DPO), a key algorithm for fine-tuning models from preferences, which is mentioned as being conceptually similar to the methods used by related works like GRAPE.
+10. **Chen et al. (2025). Conrft: A reinforced fine-tuning method for vla models via consistency policy.** This is another recent and related method for VLA fine-tuning using RL, which the authors compare their work against to differentiate their end-to-end approach from methods requiring multi-stage training or human intervention.
