@@ -58,3 +58,51 @@ ARTIST presents a compelling and well-executed solution to a significant, well-k
 10. **Hendrycks et al. 2021. Measuring mathematical problem solving with the math dataset.**
     This paper introduced the MATH dataset, a challenging and widely used benchmark for mathematical reasoning that is central to the experimental evaluation of ARTIST's capabilities.
     *   **Link:** https://arxiv.org/abs/2103.03874
+==
+
+**Agentic Reasoning and Tool Integration for LLMs via Reinforcement Learning**
+
+---
+
+### 1  Brief summary and rating (1–10)
+
+The paper introduces **ARTIST (Agentic Reasoning and Tool Integration in Self‑improving Transformers)**, a training framework that lets large language models decide *when*, *how* and *which* external tools to invoke while they reason.  ARTIST interleaves natural‑language “thought” tokens with executable tool calls (e.g., Python, web search, domain APIs) inside a single trajectory and learns the entire policy with **Group‑Relative Policy Optimisation (GRPO)**—an outcome‑based reinforcement‑learning algorithm that needs no step‑level supervision.  Loss masking ensures the model learns the *decision* to call a tool rather than merely copying its deterministic output.  Experiments on competition‑level mathematics (MATH‑500, AIME, AMC, Olympiad) and multi‑turn function‑calling benchmarks (τ‑bench, BFCL v3) show up to **22 % absolute accuracy gains** over tool‑augmented baselines and even beat GPT‑4o on several tasks .  Qualitative analyses reveal emergent behaviours such as self‑correction and adaptive tool selection .
+
+*Rating: **9 / 10*** – The work is conceptually clear, experimentally thorough, and pushes the state of the art in agentic LLMs.  A point is deducted only because long‑horizon safety and failure modes are not deeply analysed.
+
+---
+
+### 2  Key ideas
+
+1. **Unified agentic roll‑outs** – Reasoning tokens, tool calls, and tool outputs are treated as first‑class elements in one sequence, allowing the model to plan, act, observe, and revise within a single context .
+2. **Outcome‑based RL with GRPO** – By masking tool‑output tokens and grouping multiple roll‑outs, GRPO steers the policy using final‑answer rewards plus auxiliary format and execution rewards, avoiding a value network and reducing compute .
+3. **Cross‑domain efficacy** – The same policy‑training recipe transfers from symbolic maths (via a Python interpreter) to real‑world task automation (via function APIs) without extra supervision, consistently outperforming prompt‑engineering baselines .
+
+---
+
+### 3  Two or three main themes
+
+* **Tool use as reasoning, not post‑processing** – Tool invocation is embedded in the chain of thought, so the model learns *when* external computation truly helps.
+* **Reinforcement learning without dense labels** – Outcome‑only rewards, augmented with light structure/format signals, suffice to teach sophisticated multi‑step strategies.
+* **Generalisable agent behaviour** – The same architecture and training pipeline work for fundamentally different domains, hinting at a domain‑agnostic path toward practical AI agents.
+
+---
+
+### 4  Ten most important citations
+
+| #  | Citation                                                                                                                                                                                                                                                             | Relation to this paper |
+| -- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| 1  | **Wei et al. 2023. *Chain‑of‑thought prompting elicits reasoning in large language models*.** [https://arxiv.org/abs/2201.11903](https://arxiv.org/abs/2201.11903) – Establishes the value of explicit reasoning traces that ARTIST augments with tool use.          |                        |
+| 2  | **Schick et al. 2023. *Toolformer: Language models can teach themselves to use tools*.** [https://arxiv.org/abs/2302.04761](https://arxiv.org/abs/2302.04761) – Early self‑supervised approach to API calling; ARTIST surpasses it with RL and richer tool ecology.  |                        |
+| 3  | **Gao et al. 2023. *PAL: Program‑Aided Language Models*.** – Shows code‑generation for reasoning; ARTIST generalises the idea to multiple tools and RL.                                                                                                              |                        |
+| 4  | **Shao et al. 2024. *DeepSeekMath: Pushing the limits of mathematical reasoning in open language models*.** [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300) – Demonstrates GRPO’s effectiveness; ARTIST builds on the same RL core.             |                        |
+| 5  | **Schulman et al. 2017. *Proximal Policy Optimization Algorithms*.** [https://arxiv.org/abs/1707.06347](https://arxiv.org/abs/1707.06347) – Foundational RL algorithm that GRPO extends.                                                                             |                        |
+| 6  | **Ouyang et al. 2022. *Training language models to follow instructions with human feedback*.** [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155) – Baseline RLHF paradigm contrasted with ARTIST’s outcome‑only RL.                               |                        |
+| 7  | **Sutton et al. 1998. *Reinforcement Learning: An Introduction*.** – Classic textbook grounding the paper’s RL framing.                                                                                                                                              |                        |
+| 8  | **Yan et al. 2024. *BFCL v3: A Benchmark for Function Calling in LLMs*.** – Supplies one of ARTIST’s evaluation suites for multi‑turn API workflows.                                                                                                                 |                        |
+| 9  | **Yao et al. 2024. *τ‑Bench: Conversational Evaluation of Tool‑Using Agents*.** – Another key benchmark showing ARTIST’s gains in realistic dialogues.                                                                                                               |                        |
+| 10 | **Hendrycks et al. 2021. *Measuring Mathematical Problem Solving With the MATH Dataset*.** – Provides the competition‑style math tasks on which ARTIST is tested.                                                                                                    |                        |
+
+---
+
+*Prepared for a technically literate audience; all links reproduced exactly as cited in the paper.*
