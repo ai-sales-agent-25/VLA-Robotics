@@ -1,5 +1,7 @@
 https://arxiv.org/abs/2507.14843
 
+https://x.com/WUFang40615703/status/1947740481032708276
+
 **The Invisible Leash: Why RLVR May Not Escape Its Origin**
 
 ### 1. Summary and Rating
