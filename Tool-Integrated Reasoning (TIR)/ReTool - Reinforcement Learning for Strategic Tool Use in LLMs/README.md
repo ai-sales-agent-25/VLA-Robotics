@@ -1,0 +1,43 @@
+https://arxiv.org/abs/2504.11536
+
+ReTool: Reinforcement Learning for Strategic Tool Use in LLMs
+
+### 1. Summary and Rating
+
+This paper introduces ReTool, a reinforcement learning (RL) framework designed to enhance the mathematical reasoning capabilities of large language models (LLMs) by teaching them to strategically use a code interpreter (CI). The authors identify that while RL-trained models excel at textual reasoning, they fail at tasks requiring precise computation, a domain where code interpreters are superior. ReTool bridges this gap through a two-stage process. First, it performs "cold-start" supervised fine-tuning (SFT) on a synthetically generated dataset where text-based calculations in reasoning chains are replaced with executable code blocks. This provides the model with a foundational ability to use tools. Second, it employs a PPO-based RL algorithm where the model generates solutions by dynamically interleaving natural language reasoning with real-time code execution in a sandboxed environment. The model is trained using a simple outcome-based reward (i.e., whether the final answer is correct), which allows it to autonomously discover optimal strategies for when and how to use the code interpreter.
+
+Experiments on the challenging AIME Olympiad benchmark show that ReTool significantly improves performance and training efficiency. A 32B parameter model equipped with ReTool achieves 67% accuracy on AIME 2024 in just 400 training steps, far outperforming a text-only RL baseline which reached only 40% after 1080 steps. The final model surpasses strong baselines, including OpenAI's `ol-preview`. A key finding is the emergence of "metacognitive" behaviors like code self-correction (e.g., adding a missing import after an error), which were not explicitly trained for, highlighting the power of outcome-driven learning.
+
+**Rating: 9/10**
+
+The paper presents a well-structured, empirically powerful, and thoughtfully analyzed solution to a significant limitation in modern LLMs. The novelty lies not in the general idea of tool use, but in the specific, effective framework that combines SFT initialization with outcome-driven RL to teach *strategic* tool use. The methodology is sound, and the results on a difficult benchmark like AIME are impressive, clearly demonstrating the superiority of this hybrid neuro-symbolic approach over purely textual reasoning. For a PhD-level audience, the paper's greatest strength is its comprehensive "Cognitive Analysis" section. Rather than merely reporting state-of-the-art scores, the authors provide deep insights into the model's learned behaviors—tracking metrics like response length, code complexity, and invocation timing throughout training. The qualitative example of the "aha moment" in self-correction provides a compelling narrative for the emergent capabilities derived from their framework. The work is a significant contribution to the field of LLM reasoning, offering a robust method and valuable insights into creating more capable and efficient models.
+
+### 2. Main Ideas
+
+1.  **A Two-Stage Learning Framework for Strategic Tool Use:** The core methodological contribution is a structured training pipeline. It begins with a "cold-start" phase that uses an automated data pipeline to create code-augmented reasoning traces for supervised fine-tuning (SFT). This initializes the model with the basic syntax and format of tool use. This is followed by a reinforcement learning (RL) phase using PPO, where the model learns to refine its tool-use strategy based on simple outcome-based rewards (final answer correctness), enabling it to discover policies that are more effective than what can be learned from static data alone.
+
+2.  **Dynamic Interleaving of Reasoning and Real-Time Code Execution:** A key feature of the ReTool framework is that during the RL rollout, the model's reasoning process is not monolithic. It can dynamically interleave its natural language chain of thought with calls to a code interpreter. The model generates text, then a code snippet; this snippet is executed in a sandbox, and the result—whether a successful output or an error message—is fed back to the model in real-time. This tight feedback loop allows the model to immediately react to the outcome of its computations, enabling iterative refinement and complex problem-solving strategies.
+
+3.  **Emergent Metacognitive Behaviors from Outcome-Driven RL:** The paper demonstrates that by training with a simple outcome-based reward signal and a tool, the LLM develops sophisticated behaviors that were not explicitly taught. This includes the ability to perform code self-correction (e.g., identifying a `NameError` and adding the required `import` statement) and learning the optimal timing and complexity of tool invocations. This suggests that the RL process fosters a deeper, more adaptive form of reasoning where the model learns not just to solve a problem but to debug its own solution process.
+
+### 3. 10 Most Important Citations
+
+1.  **Wei et al. 2022.** *Chain-of-thought prompting elicits reasoning in large language models.* This paper is foundational as it introduced Chain-of-Thought (CoT) prompting, the core technique for eliciting multi-step reasoning in LLMs that ReTool aims to enhance. [https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf](https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf)
+
+2.  **Schulman et al. 2017.** *Proximal policy optimization algorithms.* This paper introduces the Proximal Policy Optimization (PPO) algorithm, which is the specific reinforcement learning method used by ReTool to train the policy model. [https://arxiv.org/abs/1707.06347](https://arxiv.org/abs/1707.06347)
+
+3.  **DeepSeek-AI et al. 2025.** *Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning.* This paper is cited as a key example of a powerful text-based reasoning model trained with RL, motivating ReTool's goal of addressing the limitations of such models in tasks requiring precise computation. [https://arxiv.org/abs/2501.12948](https://arxiv.org/abs/2501.12948)
+
+4.  **OpenAI. 2024.** *Learning to reason with llms, September 2024.* This citation refers to OpenAI's `ol-preview` model, which serves as a state-of-the-art competitive baseline that ReTool is shown to significantly outperform on the AIME benchmark. [https://openai.com/index/learning-to-reason-with-llms/](https://openai.com/index/learning-to-reason-with-llms/)
+
+5.  **Chen et al. 2023.** *Program of thoughts prompting: Disentangling computation from reasoning for numerical reasoning tasks.* This work introduced Program-of-Thought (PoT), a key related approach that also integrates code interpreters, but ReTool advances this by using RL to learn adaptive strategies rather than relying on prompting alone. [https://arxiv.org/abs/2211.12588](https://arxiv.org/abs/2211.12588)
+
+6.  **Gao et al. 2023.** *Pal: Program-aided language models.* PAL is another foundational work in tool-integrated reasoning that offloads calculation to interpreters, providing the conceptual groundwork that ReTool builds upon with its RL-based framework. [https://arxiv.org/abs/2211.10435](https://arxiv.org/abs/2211.10435)
+
+7.  **Wang et al. 2023.** *Mathcoder: Seamless code integration in llms for enhanced mathematical reasoning.* This is cited as related work that uses supervised fine-tuning on curated code-integrated data, which ReTool contrasts with by leveraging RL to move beyond imitation and learn more flexible tool-use strategies. [https://arxiv.org/abs/2310.03731](https://arxiv.org/abs/2310.03731)
+
+8.  **Ouyang et al. 2022.** *Training language models to follow instructions with human feedback.* This is the InstructGPT paper, a seminal work establishing the effectiveness of reinforcement learning from human feedback (RLHF) for aligning LLMs, which is the broader paradigm within which ReTool's RL-from-outcome-feedback operates. [https://arxiv.org/abs/2203.02155](https://arxiv.org/abs/2203.02155)
+
+9.  **Yang et al. 2024.** *Qwen2.5 technical report.* This report describes the Qwen2.5-32B-Instruct model, which is the main backbone LLM used in the paper's experiments to build and evaluate ReTool. [https://arxiv.org/abs/2412.15115](https://arxiv.org/abs/2412.15115)
+
+10. **Qwen Team. 2025.** *Qwq-32b: Embracing the power of reinforcement learning.* This citation refers to a strong RL-based reasoning model, QwQ-32B, which serves as another important competitive baseline in the paper's performance comparisons. [https://qwenlm.github.io/blog/qwq-32b/](https://qwenlm.github.io/blog/qwq-32b/)
