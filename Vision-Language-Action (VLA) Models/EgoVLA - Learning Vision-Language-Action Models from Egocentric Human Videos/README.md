@@ -1,5 +1,7 @@
 https://arxiv.org/abs/2507.12440
 
+https://x.com/RchalYang/status/1948129090151813255
+
 EgoVLA: Learning Vision-Language-Action Models from Egocentric Human Videos
 
 ### 1. Summary and Rating
