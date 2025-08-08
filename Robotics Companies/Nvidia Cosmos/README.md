@@ -5,3 +5,5 @@ https://developer.nvidia.com/blog/r2d2-boost-robot-training-with-world-foundatio
 https://developer.nvidia.com/blog/advancing-physical-ai-with-nvidia-cosmos-world-foundation-model-platform/
 
 https://github.com/nvidia/GR00T-dreams
+
+https://developer.nvidia.com/blog/scale-synthetic-data-and-physical-ai-reasoning-with-nvidia-cosmos-world-foundation-models/
