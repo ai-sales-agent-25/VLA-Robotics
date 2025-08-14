@@ -12,6 +12,12 @@ https://x.com/Dorialexander/status/1951781342632394886
 
 https://www.youtube.com/watch?v=DvZ8jZ-laj4
 
+https://www.youtube.com/watch?v=RK7lysjz_G0&t=21s&ab_channel=Jia-BinHuang
+
+https://www.youtube.com/watch?v=TUsbk8vPDoM&ab_channel=GabrielMongaras
+
+https://www.youtube.com/watch?v=DvZ8jZ-laj4&ab_channel=JohnTanChongMin
+
 Hierarchical Reasoning Model
 
 ### 1. Summary and Rating
